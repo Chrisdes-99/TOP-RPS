@@ -14,36 +14,42 @@
 //let userInput = document.querySelector("input");
 
 //let answer = document.getElementById("answer");
-let answer;
-let winner = document.getElementById("winner");
+
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorButton = document.querySelector("#scissors");
+
+
+
+let results = document.querySelector("#results");
+let pointResults = document.querySelector("#points")
 
 let userPoints = 0;
 let computerPoints = 0;
 
 
+// do not touch!
 function getRandomized(){
 
     let choices = ["Rock","Paper","Scissors"];
 
     const rand = choices[Math.floor(Math.random() * choices.length)];
+
     return rand;
 }
 
 function play(inputSelection, computerSelection){
     if((inputSelection == computerSelection)){
-        console.log("It's a draw");
-        answer = "It's a draw";
+        results.innerHTML = "It's a draw";
     }
 
     else if((inputSelection == "Rock" && computerSelection == "Scissors") || (inputSelection == "Scissors" && computerSelection == "Paper") || (inputSelection == "Paper" && computerSelection == "Rock")){
-        console.log("You Win! " + inputSelection + " beats " + computerSelection);
-        answer = "You Win! " + inputSelection + " beats " + computerSelection;
+        results.innerHTML = "You Win! " + inputSelection + " beats " + computerSelection;
         userPoints += 1;
     }
     
     else if((computerSelection == "Rock" && inputSelection == "Scissors") || (computerSelection == "Scissors" && inputSelection == "Paper") || (computerSelection == "Paper" && inputSelection == "Rock")){
-        console.log("The Computer Wins! " + computerSelection + " beats " + inputSelection);
-        answer = "The Computer Wins! " + computerSelection + " beats " + inputSelection;
+        results.innerHTML = "The Computer Wins! " + computerSelection + " beats " + inputSelection;
         computerPoints += 1;
     }
 
@@ -51,8 +57,28 @@ function play(inputSelection, computerSelection){
         console.log("Error");
     }
 
+    pointResults.innerHTML = "Your Points: " + userPoints + " || " + "Computer Points: " + computerPoints;
+
 }
 
+rockButton.addEventListener('click', ()=>{
+    choice = 'Rock';
+    play(choice,getRandomized());
+});
+
+paperButton.addEventListener('click', ()=>{
+    choice = 'Paper';
+    play(choice,getRandomized());
+});
+
+scissorButton.addEventListener('click', ()=>{
+    choice  = 'Scissors';
+    play(choice,getRandomized());
+});
+
+
+
+/*
 function game(){
     for(let i = 1; i < 6;i++){
         let userInput = prompt("Choose: Rock, Paper, or Scissors");
@@ -73,5 +99,8 @@ function game(){
     console.log("YOUR POINTS " + userPoints);
     console.log("COMPUTER POINTS " + computerPoints);
 }
+*/
 
-game();
+
+
+//play(choice,computerChoice);
