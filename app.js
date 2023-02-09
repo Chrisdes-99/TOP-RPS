@@ -42,8 +42,8 @@ function play(inputSelection, computerSelection){
     }
     
     else if((computerSelection == "Rock" && inputSelection == "Scissors") || (computerSelection == "Scissors" && inputSelection == "Paper") || (computerSelection == "Paper" && inputSelection == "Rock")){
-        console.log("The Computer Win! " + computerSelection + " beats " + inputSelection);
-        answer = "The Computer Win! " + computerSelection + " beats " + inputSelection;
+        console.log("The Computer Wins! " + computerSelection + " beats " + inputSelection);
+        answer = "The Computer Wins! " + computerSelection + " beats " + inputSelection;
         computerPoints += 1;
     }
 
@@ -70,8 +70,8 @@ function game(){
         winner.innerHTML = "Oh no... The computer won :("
     }
 
-    console.log("YOUR POINTS" + userPoints);
-    console.log("COMPUTER POINTS" + computerPoints);
+    console.log("YOUR POINTS " + userPoints);
+    console.log("COMPUTER POINTS " + computerPoints);
 }
 
 game();
