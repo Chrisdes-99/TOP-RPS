@@ -48,17 +48,24 @@ function getRandomized(){
 function play(inputSelection, computerSelection){
     if((inputSelection == computerSelection)){
         roundStatement.innerHTML = "IT'S A DRAW";
+        roundStatement.style.color = "magenta";
+        gameStatement.innerHTML = "";
+        gameLog.style.backgroundColor = "black";
+        gameStatement.style.backgroundColor = "black";
+
         roundLog.appendChild(roundStatement);
     }
 
     else if((inputSelection == "ROCK" && computerSelection == "SCISSORS") || (inputSelection == "SCISSORS" && computerSelection == "PAPER") || (inputSelection == "PAPER" && computerSelection == "ROCK")){
         roundStatement.innerHTML = "YOU WIN THIS ROUND! " + inputSelection + " BEATS " + computerSelection;
+        roundStatement.style.color = "lightblue";
         userPoints += 1;
         roundLog.appendChild(roundStatement);
     }
     
     else if((computerSelection == "ROCK" && inputSelection == "SCISSORS") || (computerSelection == "SCISSORS" && inputSelection == "PAPER") || (computerSelection == "PAPER" && inputSelection == "ROCK")){
         roundStatement.innerHTML = "THE COMPUTER WINS THIS ROUND! " + computerSelection + " BEATS " + inputSelection;
+        roundStatement.style.color = "red";
         computerPoints += 1;
         roundLog.appendChild(roundStatement);
     }
@@ -69,11 +76,11 @@ function play(inputSelection, computerSelection){
 
     // If Statements to determine winner after reaching max points
 
-    if(computerPoints == 2){
+    if(computerPoints == 5){
 
         gameStatement.innerHTML = "THE COMPUTER WINS!!";
-        gameLog.style.backgroundColor = "blue";
-        gameStatement.style.backgroundColor = "blue";
+        gameLog.style.backgroundColor = "red";
+        gameStatement.style.backgroundColor = "red";
 
         gameLog.appendChild(gameStatement);
 
@@ -82,7 +89,7 @@ function play(inputSelection, computerSelection){
         computerPoints = 0;
         userPoints = 0;
     }
-    else if(userPoints == 2){
+    else if(userPoints == 5){
         gameStatement.innerHTML = "YOU WIN!!";
         gameLog.style.backgroundColor = "blue";
         gameStatement.style.backgroundColor = "blue";
@@ -90,12 +97,12 @@ function play(inputSelection, computerSelection){
         gameLog.appendChild(gameStatement);
 
         roundStatement.innerHTML="";
-        
+
         computerPoints = 0;
         userPoints = 0;
     }
 
-    else if((userPoints == 1 || computerPoints == 1)){
+    else if((userPoints == 1 || computerPoints == 1) || roundStatement == "IT'S A DRAW"){
         gameLog.style.backgroundColor = "black";
         gameStatement.innerHTML = "";
     }
