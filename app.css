@@ -1,19 +1,41 @@
 
-@media (max-width: 1300px) {
+@media (max-width: 800px) {
     .flex-container{
       flex-direction: column;
     }
   }
 
-  h1,h2,h3{
+  body{
+    font-family: monospace;
+    padding: 0;
+    margin: 0;
+  }
+
+  .title{
     text-align: center;
+    background-color: black;
+    color: white;
+    padding: 20px;
+
+  }
+
+  .game{
+    text-align: center;
+  }
+
+  .game > #points{
+    background-color: black;
+    color: white;
+    padding: 30px;
   }
 
 .flex-container{
     display: flex;
     align-items: center;
     justify-items: center;
+    text-align: center;
 }
+
 
 .button{
     flex: 1;
@@ -26,6 +48,7 @@
     display: block;
     padding: 10px;
     font-size: larger;
+    font-family: monospace;
     background-color: black;
     color: white;
     border-radius: 10px;
@@ -34,4 +57,21 @@
 
 .button > button:hover{
     cursor: pointer;
+}
+
+#roundLog{
+    background-color: black;
+    color: white;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    padding: 10px;
+}
+
+
+.log{
+    padding: 10px;
+    /*background-color: rgb(30, 55, 87);   */
+    background-color: black;
+    color: white; 
 }
