@@ -48,7 +48,7 @@ function getRandomized(){
 function play(inputSelection, computerSelection){
     if((inputSelection == computerSelection)){
         roundStatement.innerHTML = "IT'S A DRAW";
-        roundStatement.style.color = "magenta";
+        roundStatement.style.color = "lightblue";
         gameStatement.innerHTML = "";
         gameLog.style.backgroundColor = "black";
         gameStatement.style.backgroundColor = "black";
