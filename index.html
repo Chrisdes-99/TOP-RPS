@@ -4,12 +4,56 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="app.css" />
     <title>Document</title>
   </head>
   <body>
-    <div id="answer"></div>
-    <br />
-    <div id="winner"></div>
+    <div class="title">
+    <h1>The Battle Against AI:</h1>
+    <h2>A Rock, Paper, Scissors Game</h2>
+    <!--<a href="https://www.flaticon.com/free-icons/rock-paper-scissors" title="rock paper scissors icons">Rock paper scissors icons created by Freepik - Flaticon</a>-->
+    </div>
+    <Br></Br>
+
+    <div class="game">
+    
+      <img src="images/rock-paper-scissors.png" width="100" height="100">
+
+    <h2 id="results">PICK YOUR CHOICE</h2>
+
+    <div class="flex-container">
+      <div class="button">
+        <button id="rock">Rock</button>
+      </div>
+
+      <div class="button">
+        <button id="paper">Paper</button>
+       <!-- <a href="https://www.flaticon.com/free-icons/document" title="document icons">Document icons created by smalllikeart - Flaticon</a>-->
+      </div>
+
+      <div class="button">
+        <button id="scissors">Scissors</button>
+        <!--<a href="https://www.flaticon.com/free-icons/scissors" title="scissors icons">Scissors icons created by IYIKON - Flaticon</a>-->
+      </div>
+    </div>
+
+    <br>
+
+    <h2 id="points">YOUR POINTS: 0 || COMPUTER POINTS: 0</h2>
+    <h3 id="wins">FIRST TO 5 POINTS WINS</h3>
+    <br>
+
+    <div id="roundLog">
+      <h2>ROUND RESULT:</h2>
+    </div>
+
+    <br>
+  
+    <div class="log">
+      <h2>GAME RESULT:</h2>
+    </div>
+
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
