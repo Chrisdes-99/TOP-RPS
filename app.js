@@ -15,6 +15,7 @@
 
 //let answer = document.getElementById("answer");
 
+//buttons
 const rockButton = document.querySelector("#rock");
 const paperButton = document.querySelector("#paper");
 const scissorButton = document.querySelector("#scissors");
@@ -29,10 +30,28 @@ let computerChoice = document.querySelector("#compChoice")
 
 //let results = document.querySelector("#results");
 let pointResults = document.querySelector("#points")
-let winner = document.querySelector("#winner");
+const scoreBoard = document.createElement("div");
+
+pointResults.appendChild(scoreBoard);
+scoreBoard.className = "scoreBoard";
+//scoreBoard.style = 'display:grid;grid-template-columns:repeat(2,.3fr);align-items: center;justify-items:center';
+
+const userScore = document.createElement('h2');
+userScore.id = "userScore";
+const compScore = document.createElement('h2');
+compScore.id = "compScore";
+//userScore.style = 'background-color:black;color:white;padding:10px';
+
+scoreBoard.appendChild(userScore);
+scoreBoard.appendChild(compScore);
 
 let userPoints = 0;
 let computerPoints = 0;
+
+
+
+let winner = document.querySelector("#winner");
+
 
 
 // do not touch!
@@ -46,6 +65,8 @@ function getRandomized(){
 }
 
 function play(inputSelection, computerSelection){
+
+    // for 
     if((inputSelection == computerSelection)){
         roundStatement.innerHTML = "IT'S A DRAW";
         roundStatement.style.color = "lightblue";
@@ -76,7 +97,7 @@ function play(inputSelection, computerSelection){
 
     // If Statements to determine winner after reaching max points
 
-    if(computerPoints == 5){
+    if(computerPoints == 3){
 
         gameStatement.innerHTML = "THE COMPUTER WINS!!";
         gameLog.style.backgroundColor = "red";
@@ -89,7 +110,7 @@ function play(inputSelection, computerSelection){
         computerPoints = 0;
         userPoints = 0;
     }
-    else if(userPoints == 5){
+    else if(userPoints == 3){
         gameStatement.innerHTML = "YOU WIN!!";
         gameLog.style.backgroundColor = "blue";
         gameStatement.style.backgroundColor = "blue";
@@ -102,6 +123,13 @@ function play(inputSelection, computerSelection){
         userPoints = 0;
     }
 
+    else if(userPoints > 3  || computerPoints > 3){
+        gameStatement.innerHTML = "TBD"
+        gameLog.style.backgroundColor = "blue";
+        gameStatement.style.backgroundColor = "blue";
+        gameLog.appendChild(gameStatement);
+    }
+
     else if((userPoints == 1 || computerPoints == 1) || roundStatement == "IT'S A DRAW"){
         gameLog.style.backgroundColor = "black";
         gameStatement.innerHTML = "";
@@ -111,7 +139,8 @@ function play(inputSelection, computerSelection){
         console.log("ERROR");
     }
 
-    pointResults.innerHTML = "YOUR POINTS: " + userPoints + "  ||  " + "COMPUTER POINTS: " + computerPoints;
+    userScore.innerText = "You, The Hero: " + "\n\n" + userPoints;
+    compScore.innerText =  "Computer, The Evil AI: " + "\n\n" + computerPoints;
 
 }
 
@@ -130,31 +159,3 @@ scissorButton.addEventListener('click', ()=>{
     play(choice,getRandomized());
 });
 
-
-
-/*
-function game(){
-    for(let i = 1; i < 6;i++){
-        let userInput = prompt("Choose: Rock, Paper, or Scissors");
-        play(userInput,getRandomized());
-        window.alert(answer + " (Round: " + i + " Your Points: " + userPoints + " " + " Computer Points: " + computerPoints + ")");
-    }
-
-    if(userPoints == computerPoints){
-        winner.innerHTML = "Oh well... It's a tie";
-    }
-    else if(userPoints > computerPoints){
-        winner.innerHTML = "You beat the computer!"
-    }
-    else{
-        winner.innerHTML = "Oh no... The computer won :("
-    }
-
-    console.log("YOUR POINTS " + userPoints);
-    console.log("COMPUTER POINTS " + computerPoints);
-}
-*/
-
-
-
-//play(choice,computerChoice);

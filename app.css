@@ -71,3 +71,26 @@
     border-radius: 10px;
 }
 
+.results{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.scoreBoard{
+  display:grid;
+  grid-template-columns:repeat(2,.5fr);
+  align-items: center;
+  justify-items:center;
+  padding: 50px;
+}
+
+#userScore,#compScore{
+  background-color: black;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
