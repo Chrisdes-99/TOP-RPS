@@ -11,14 +11,11 @@
 
 */
 
-//let userInput = document.querySelector("input");
-
-//let answer = document.getElementById("answer");
-
 //buttons
 const rockButton = document.querySelector("#rock");
 const paperButton = document.querySelector("#paper");
 const scissorButton = document.querySelector("#scissors");
+const clickPrompt = document.querySelector("#Click");
 
 const roundLog = document.querySelector("#roundLog");
 const roundStatement = document.createElement("h3");
@@ -28,33 +25,35 @@ const gameStatement = document.createElement("h3");
 
 let computerChoice = document.querySelector("#compChoice")
 
-//let results = document.querySelector("#results");
 let pointResults = document.querySelector("#points")
 const scoreBoard = document.createElement("div");
 
 pointResults.appendChild(scoreBoard);
 scoreBoard.className = "scoreBoard";
-//scoreBoard.style = 'display:grid;grid-template-columns:repeat(2,.3fr);align-items: center;justify-items:center';
+
 
 const userScore = document.createElement('h2');
 userScore.id = "userScore";
 const compScore = document.createElement('h2');
 compScore.id = "compScore";
-//userScore.style = 'background-color:black;color:white;padding:10px';
+
+userScore.style = "display:none;box-shadow:none";
+compScore.style = "display:none;box-shadow:none";
 
 scoreBoard.appendChild(userScore);
 scoreBoard.appendChild(compScore);
+
+const restartButton = document.querySelector("#restart");
+restartButton.style.display = "none";
+
+let winner = document.querySelector("#winner");
 
 let userPoints = 0;
 let computerPoints = 0;
 
 
+/****************** Random RPS Selection FOR "AI"  ***************************/
 
-let winner = document.querySelector("#winner");
-
-
-
-// do not touch!
 function getRandomized(){
 
     let choices = ["ROCK","PAPER","SCISSORS"];
@@ -64,98 +63,120 @@ function getRandomized(){
     return rand;
 }
 
+
+function restart(message,buttonColor){
+
+    /****************** Displays Restart Button and Disables RPS buttons ***************************/
+
+    restartButton.innerText = message;
+    restartButton.style.backgroundColor = buttonColor;
+
+    restartButton.style.display = "block";
+
+    rockButton.disabled = true
+    paperButton.disabled = true;
+    scissorButton.disabled = true;
+
+    /****************** Resets UI When Clicked, Starts Game Over  ***************************/
+
+    restartButton.addEventListener('click',()=>{
+
+        gameLog.style.backgroundColor = "black";
+        gameStatement.innerText = "";
+
+        userScore.style = "background-color:black;box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;";
+        compScore.style = "background-color:black;box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;";
+
+        clickPrompt.style.display = "block";
+
+        restartButton.style.display = "none";
+
+        rockButton.disabled = false;
+        paperButton.disabled = false;
+        scissorButton.disabled = false;
+
+        userPoints = 0;
+        computerPoints = 0;
+    })
+}
+
+
 function play(inputSelection, computerSelection){
 
-    // for 
-    if((inputSelection == computerSelection)){
-        roundStatement.innerHTML = "IT'S A DRAW";
-        roundStatement.style.color = "lightblue";
-        gameStatement.innerHTML = "";
-        gameLog.style.backgroundColor = "black";
-        gameStatement.style.backgroundColor = "black";
+    /****************** Rewards Points to Round Winner and changes UI to indicate winner  ***************************/ 
 
-        roundLog.appendChild(roundStatement);
+    if((inputSelection == computerSelection)){
+        userScore.style = "background-color:black;box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;";
+        compScore.style = "background-color:black;box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;";
     }
 
     else if((inputSelection == "ROCK" && computerSelection == "SCISSORS") || (inputSelection == "SCISSORS" && computerSelection == "PAPER") || (inputSelection == "PAPER" && computerSelection == "ROCK")){
-        roundStatement.innerHTML = "YOU WIN THIS ROUND! " + inputSelection + " BEATS " + computerSelection;
-        roundStatement.style.color = "lightblue";
+        userScore.style = "background-color:rgb(0,0,139);box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;";
+        compScore.style = "background-color:black;box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;";
         userPoints += 1;
-        roundLog.appendChild(roundStatement);
     }
     
     else if((computerSelection == "ROCK" && inputSelection == "SCISSORS") || (computerSelection == "SCISSORS" && inputSelection == "PAPER") || (computerSelection == "PAPER" && inputSelection == "ROCK")){
-        roundStatement.innerHTML = "THE COMPUTER WINS THIS ROUND! " + computerSelection + " BEATS " + inputSelection;
-        roundStatement.style.color = "red";
+        userScore.style = "background-color:black;box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;";
+        compScore.style = "background-color:rgba(127,16,16,1);box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;";
         computerPoints += 1;
-        roundLog.appendChild(roundStatement);
     }
 
     else{
         console.log("Error");
     }
 
-    // If Statements to determine winner after reaching max points
+    /****************** UI Changes When Either Side Wins  ***************************/
 
     if(computerPoints == 3){
 
         gameStatement.innerHTML = "THE COMPUTER WINS!!";
-        gameLog.style.backgroundColor = "red";
-        gameStatement.style.backgroundColor = "red";
+        gameLog.style.backgroundColor = "rgba(127,16,16,1)";
+        gameStatement.style.backgroundColor = "rgba(127,16,16,1)";
 
         gameLog.appendChild(gameStatement);
 
-        roundStatement.innerHTML= "";
-
-        computerPoints = 0;
-        userPoints = 0;
+        restart("YOU HAVE ANOTHER CHANCE TO SAVE HUMANITY","rgba(127,16,16,1)");
     }
+
     else if(userPoints == 3){
         gameStatement.innerHTML = "YOU WIN!!";
-        gameLog.style.backgroundColor = "blue";
-        gameStatement.style.backgroundColor = "blue";
+        gameLog.style.backgroundColor = "rgb(0,0,139)";
+        gameStatement.style.backgroundColor = "rgb(0,0,139)";
 
         gameLog.appendChild(gameStatement);
 
-        roundStatement.innerHTML="";
+        restart("WANT ANOTHER CRACK AT THE AI?","rgb(0,0,139)");
 
-        computerPoints = 0;
-        userPoints = 0;
-    }
-
-    else if(userPoints > 3  || computerPoints > 3){
-        gameStatement.innerHTML = "TBD"
-        gameLog.style.backgroundColor = "blue";
-        gameStatement.style.backgroundColor = "blue";
-        gameLog.appendChild(gameStatement);
-    }
-
-    else if((userPoints == 1 || computerPoints == 1) || roundStatement == "IT'S A DRAW"){
-        gameLog.style.backgroundColor = "black";
-        gameStatement.innerHTML = "";
     }
 
     else{
         console.log("ERROR");
     }
 
-    userScore.innerText = "You, The Hero: " + "\n\n" + userPoints;
-    compScore.innerText =  "Computer, The Evil AI: " + "\n\n" + computerPoints;
+    userScore.innerText = "You, The Hero: " + inputSelection + "\n\n" + userPoints;
+    compScore.innerText =  "The Evil AI: " + computerSelection +  "\n\n" + computerPoints;
 
 }
 
+/****************** Buttons  ***************************/
+
 rockButton.addEventListener('click', ()=>{
     choice = 'ROCK';
-    play(choice,getRandomized());   
+    play(choice,getRandomized());  
+    clickPrompt.style.display = "none";
 });
 
 paperButton.addEventListener('click', ()=>{
     choice = 'PAPER';
     play(choice,getRandomized());
+    clickPrompt.style.display = "none";
 });
 
 scissorButton.addEventListener('click', ()=>{
     choice  = 'SCISSORS';
     play(choice,getRandomized());
+    clickPrompt.style.display = "none";
 });
+
 
